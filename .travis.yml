@@ -18,8 +18,7 @@ before_install: # Use this to prepare the system to install prerequisites or dep
   - sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu precise main" > /etc/apt/sources.list.d/ros-latest.list'
   - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
   - sudo apt-get update -qq
-  - sudo apt-get install -qq -y python-rosdep python-wstool ros-$ROS_DISTRO-catkin ros-$ROS_DISTRO-ros 
-  - sudo pip install catkin_pkg
+  - sudo apt-get install -qq -y python-catkin-pkg python-rosdep python-wstool ros-$ROS_DISTRO-catkin ros-$ROS_DISTRO-ros 
   # Setup rosdep
   - sudo rosdep init
   - rosdep update
@@ -48,7 +47,6 @@ install: # Use this to install any prerequisites or dependencies necessary to ru
 before_script: # Use this to prepare your build for testing e.g. copy database configurations, environment variables, etc.
   # - source ~/catkin_ws/devel/setup.bash  
   - source /opt/ros/$ROS_DISTRO/setup.bash
-  - export
-  - python -c "import sys, pprint; pprint.pprint(sys.path)"
+  - export PYTHONPATH=/usr/lib/pymodules/python2.7:$PYTHONPATH
 script: # All commands must exit with code 0 on success. Anything else is considered failure.
   - catkin_make -j2
